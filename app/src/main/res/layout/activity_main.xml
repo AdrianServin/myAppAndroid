@@ -6,24 +6,46 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <ToggleButton
-        android:id="@+id/toggleButton1"
+    <TextView
+        android:id="@+id/lblRateMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ToggleButton" />
+        android:text="Rate Me"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton2"
+    <RatingBar
+        android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOn="@string/toggle_turn_on"
-        android:textOff="@string/toggle_turn_off"
-        android:checked="true" />
+        android:numStars="4"
+        android:stepSize="1.0"
+        android:rating="1.0" />
 
     <Button
-        android:id="@+id/btnDisplay"
+        android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_display" />
+        android:text="Submit" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/lblResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Result : "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/txtRatingValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
 
 </LinearLayout>
