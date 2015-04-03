@@ -1,19 +1,19 @@
 package com.movil.desarrollo.myappandroid;
 
+import java.util.ArrayList;
+import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.RatingBar.OnRatingBarChangeListener;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private RatingBar ratingBar;
-    private TextView txtRatingValue;
+    private Spinner spinner1, spinner2;
     private Button btnSubmit;
 
     @Override
@@ -21,41 +21,47 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addListenerOnRatingBar();
+        addItemsOnSpinner2();
         addListenerOnButton();
+        addListenerOnSpinnerItemSelection();
     }
 
-    public void addListenerOnRatingBar() {
+    // add items into spinner dynamically
+    public void addItemsOnSpinner2() {
 
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        txtRatingValue = (TextView) findViewById(R.id.txtRatingValue);
-
-        //if rating value is changed,
-        //display the current rating value in the result (textview) automatically
-        ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-            public void onRatingChanged(RatingBar ratingBar, float rating,
-                                        boolean fromUser) {
-
-                txtRatingValue.setText(String.valueOf(rating));
-
-            }
-        });
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        List<String> list = new ArrayList<String>();
+        list.add("list 1");
+        list.add("list 2");
+        list.add("list 3");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(dataAdapter);
     }
 
+    public void addListenerOnSpinnerItemSelection() {
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
+
+    // get the selected dropdown list value
     public void addListenerOnButton() {
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        //if click on me, then display the current rating value.
         btnSubmit.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 Toast.makeText(MainActivity.this,
-                        String.valueOf(ratingBar.getRating()),
+                        "OnClickListener : " +
+                                "\nSpinner 1 : "+ String.valueOf(spinner1.getSelectedItem()) +
+                                "\nSpinner 2 : "+ String.valueOf(spinner2.getSelectedItem()),
                         Toast.LENGTH_SHORT).show();
-
             }
 
         });
