@@ -4,38 +4,32 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
-    private EditText edittext;
+    private EditText password;
+    private Button btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addKeyListener();
+        addListenerOnButton();
     }
 
-    public void addKeyListener() {
+    public void addListenerOnButton() {
 
-        // get edittext component
-        edittext = (EditText) findViewById(R.id.editText);
+        password = (EditText) findViewById(R.id.txtPassword);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        // add a keylistener to keep track user input
-        edittext.setOnKeyListener(new View.OnKeyListener() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // if keydown and "enter" is pressed
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    // display a floating message
-                    Toast.makeText(MainActivity.this, edittext.getText(), Toast.LENGTH_LONG).show();
-                    return true;
-                }
-
-                return false;
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, password.getText(), Toast.LENGTH_SHORT).show();
             }
         });
     }
