@@ -1,45 +1,67 @@
 package com.movil.desarrollo.myappandroid;
 
+import java.util.ArrayList;
+import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 
-    private ToggleButton toggleButton1, toggleButton2;
-    private Button btnDisplay;
+    private Spinner spinner1, spinner2;
+    private Button btnSubmit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        addItemsOnSpinner2();
         addListenerOnButton();
+        addListenerOnSpinnerItemSelection();
     }
 
-    public void addListenerOnButton() {
-        toggleButton1 = (ToggleButton) findViewById(R.id.toggleButton1);
-        toggleButton2 = (ToggleButton) findViewById(R.id.toggleButton2);
-        btnDisplay = (Button) findViewById(R.id.btnDisplay);
+    // add items into spinner dynamically
+    public void addItemsOnSpinner2() {
 
-        btnDisplay.setOnClickListener(new OnClickListener() {
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        List<String> list = new ArrayList<String>();
+        list.add("list 1");
+        list.add("list 2");
+        list.add("list 3");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(dataAdapter);
+    }
+
+    public void addListenerOnSpinnerItemSelection() {
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
+
+    // get the selected dropdown list value
+    public void addListenerOnButton() {
+
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+
+        btnSubmit.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                StringBuffer result = new StringBuffer();
-                result.append("toggleButton1 : ").append(toggleButton1.getText());
-                result.append("\ntoggleButton2 : ").append(toggleButton2.getText());
-
-                Toast.makeText(MainActivity.this, result.toString(),
+                Toast.makeText(MainActivity.this,
+                        "OnClickListener : " +
+                                "\nSpinner 1 : "+ String.valueOf(spinner1.getSelectedItem()) +
+                                "\nSpinner 2 : "+ String.valueOf(spinner2.getSelectedItem()),
                         Toast.LENGTH_SHORT).show();
-
             }
 
         });
