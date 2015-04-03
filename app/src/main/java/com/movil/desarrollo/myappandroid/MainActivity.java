@@ -2,34 +2,58 @@ package com.movil.desarrollo.myappandroid;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
-
 public class MainActivity extends Activity {
-    private EditText password;
-    private Button btnSubmit;
+
+    private CheckBox chkIos, chkAndroid, chkWindows;
+    private Button btnDisplay;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        addListenerOnChkIos();
         addListenerOnButton();
     }
 
-    public void addListenerOnButton() {
-
-        password = (EditText) findViewById(R.id.txtPassword);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+    public void addListenerOnChkIos() {
+        chkIos = (CheckBox) findViewById(R.id.chkIos);
+        chkIos.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, password.getText(), Toast.LENGTH_SHORT).show();
+                //is chkIos checked?
+                if (((CheckBox) v).isChecked()) {
+                    Toast.makeText(MainActivity.this,"Bro, try Android :)", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+    }
+
+    public void addListenerOnButton() {
+        chkIos = (CheckBox) findViewById(R.id.chkIos);
+        chkAndroid = (CheckBox) findViewById(R.id.chkAndroid);
+        chkWindows = (CheckBox) findViewById(R.id.chkWindows);
+        btnDisplay = (Button) findViewById(R.id.btnDisplay);
+
+        btnDisplay.setOnClickListener(new OnClickListener() {
+            //Run when button is clicked
+            @Override
+            public void onClick(View v) {
+
+                StringBuffer result = new StringBuffer();
+                result.append("IPhone check : ").append(chkIos.isChecked());
+                result.append("\nAndroid check : ").append(chkAndroid.isChecked());
+                result.append("\nWindows Mobile check :").append(chkWindows.isChecked());
+
+                Toast.makeText(MainActivity.this, result.toString(),Toast.LENGTH_LONG).show();
             }
         });
     }
