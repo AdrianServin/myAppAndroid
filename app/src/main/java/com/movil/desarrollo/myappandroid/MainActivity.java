@@ -8,11 +8,11 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 
-    private RadioGroup radioSexGroup;
-    private RadioButton radioSexButton;
+    private ToggleButton toggleButton1, toggleButton2;
     private Button btnDisplay;
 
     @Override
@@ -24,20 +24,24 @@ public class MainActivity extends Activity {
     }
 
     public void addListenerOnButton() {
-        radioSexGroup = (RadioGroup) findViewById(R.id.radioSex);
+        toggleButton1 = (ToggleButton) findViewById(R.id.toggleButton1);
+        toggleButton2 = (ToggleButton) findViewById(R.id.toggleButton2);
         btnDisplay = (Button) findViewById(R.id.btnDisplay);
 
         btnDisplay.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // get selected radio button from radioGroup
-                int selectedId = radioSexGroup.getCheckedRadioButtonId();
-                // find the radiobutton by returned id
-                radioSexButton = (RadioButton) findViewById(selectedId);
 
-                Toast.makeText(MainActivity.this,radioSexButton.getText(), Toast.LENGTH_SHORT).show();
+                StringBuffer result = new StringBuffer();
+                result.append("toggleButton1 : ").append(toggleButton1.getText());
+                result.append("\ntoggleButton2 : ").append(toggleButton2.getText());
+
+                Toast.makeText(MainActivity.this, result.toString(),
+                        Toast.LENGTH_SHORT).show();
+
             }
+
         });
     }
 }
