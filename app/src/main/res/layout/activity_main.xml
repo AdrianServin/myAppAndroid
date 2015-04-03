@@ -7,27 +7,27 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btnChangeDate"
+        android:id="@+id/btnChangeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Date" />
+        android:text="Change Time" />
 
     <TextView
-        android:id="@+id/lblDate"
+        android:id="@+id/lblTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current Date (M-D-YYYY): "
+        android:text="Current Time (H:M): "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <DatePicker
-        android:id="@+id/dpResult"
+    <TimePicker
+        android:id="@+id/timePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
