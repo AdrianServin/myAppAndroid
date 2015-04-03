@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Mi Primer Aplicación en Android</string>
-    <string name="lblPassword">Enter Your Password :</string>
-    <string name="btn_submit">Submit</string>
+    <string name="hello">Hello World, MyAndroidAppActivity!</string>
+    <string name="chk_ios">IPhone</string>
+    <string name="chk_android">Android</string>
+    <string name="chk_windows">Windows Mobile</string>
+    <string name="btn_display">Display</string>
 </resources>
