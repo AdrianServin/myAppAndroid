@@ -1,34 +1,41 @@
 package com.movil.desarrollo.myappandroid;
 
-
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
-    Button button;
+    private EditText edittext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addListenerOnButton();
+        addKeyListener();
     }
 
-    public void addListenerOnButton() {
+    public void addKeyListener() {
 
-        button = (Button) findViewById(R.id.button);
+        // get edittext component
+        edittext = (EditText) findViewById(R.id.editText);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        // add a keylistener to keep track user input
+        edittext.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com.mx"));
-                startActivity(browserIntent);
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // if keydown and "enter" is pressed
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // display a floating message
+                    Toast.makeText(MainActivity.this, edittext.getText(), Toast.LENGTH_LONG).show();
+                    return true;
+                }
+
+                return false;
             }
         });
     }
